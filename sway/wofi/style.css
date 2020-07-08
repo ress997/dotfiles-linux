@@ -1,0 +1,49 @@
+/* Decorate window */
+window {
+	border: 4px #1f1f1f solid;
+	font-family: 'Cica';
+}
+
+
+/* Set margins */
+
+#text, expander title #text {
+	margin: 0 0 0 5px;
+}
+
+#text:dir(rtl), expander title #text:dir(rtl) {
+	margin: 0 5px 0 0;
+}
+
+expander row #img {
+	margin: 0 0 0 18px;
+}
+
+expander row #img:dir(rtl) {
+	margin: 0 18px 0 0;
+}
+
+#input {
+	border-radius: 3px;
+	margin: 5px;
+}
+
+#inner-box, #outer-box {
+	margin: 5px;
+}
+
+/* Set colors */
+
+row:selected {
+	background-color: #3f3f3f;
+	outline: none;
+}
+
+flowboxchild:selected, flowboxchild:focus {
+	background-color: #1f1f1f;
+	outline: none;
+}
+
+#input:focus {
+	box-shadow: none;
+}

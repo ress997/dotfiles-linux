@@ -1,0 +1,7 @@
+# vim:ft=conf:
+no_actions=true
+allow_images=true
+drun-display_generic=true
+dynamic_lines=true
+insensitive=true
+location=center

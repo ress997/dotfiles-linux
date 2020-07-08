@@ -12,13 +12,13 @@ if [[ -f ~/.config/systemd/user/lock-now.service ]]; then
 	)
 fi
 
-if (( $+commands[swaymsg] )); then
-	list+=(
-		'Logout' 'swaymsg exit'
-	)
-elif (( $+commands[i3-msg] )); then
+if (( $+commands[i3-msg] )); then
 	list+=(
 		'Logout' 'i3-msg exit'
+	)
+elif (( $+commands[swaymsg] )); then
+	list+=(
+		'Logout' 'swaymsg exit'
 	)
 fi
 

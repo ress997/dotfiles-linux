@@ -134,7 +134,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+r reload
 
 # lock
-set $lock "swaylock -i $(find "~/Pictures/wallpaper/"|shuf|head -n 1)"
+set $lock 'swaylock -f -i "$(find ~/Pictures/wallpaper/ -type f|shuf|head -n 1)"'
 bindsym Pause exec --no-startup-id $lock
 bindsym Mod4+Escape exec --no-startup-id $lock
 
@@ -146,19 +146,27 @@ bindsym Print exec "~/.config/sway/screenshot.sh"
 bindsym $mod+Print exec "~/.config/sway/screenshot.sh full"
 
 # launcher
-bindsym Mod4+r exec "rofi -show drun"
-bindsym Mod4+Shift+semicolon exec "rofi -show run -terminal"
-bindsym Mod4+Tab exec "rofi -modi window -show window -kb-row-down Alt+Tab"
-bindsym Mod4+Shift+q exec "rofi -modi system:~/.config/rofi/system.sh -show system"
+bindsym Mod4+r exec "wofi -S drun"
+#bindsym Mod4+Shift+semicolon exec "rofi -show run -terminal"
+#bindsym Mod4+Tab exec "rofi -modi window -show window -kb-row-down Alt+Tab"
+bindsym Mod4+Shift+q exec "~/.config/wofi/system.sh"
 
 # back light
-bindsym XF86MonBrightnessUp exec "light -A 10"
-bindsym XF86MonBrightnessDown exec "light -U 5"
+# /etc/sudoers に `USERNAME ALL=(ALL) NOPASSWD: /usr/bin/light` を追加すること
+bindsym XF86MonBrightnessUp exec "sudo light -A 10"
+bindsym XF86MonBrightnessDown exec "sudo light -U 5"
+## Thinkpad only
+bindsym XF86WakeUp+F6 exec "sudo light -A 10"
+bindsym XF86WakeUp+F5 exec "sudo light -U 5"
 
 # Pulse Audio
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +10%"
 bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%"
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle"
+## Thinkpad only
+bindsym XF86WakeUp+F3 exec --no-startup-id "pactl set-sink-volume 0 +10%"
+bindsym XF86WakeUp+F2 exec --no-startup-id "pactl set-sink-volume 0 -5%"
+bindsym XF86WakeUp+F1 exec --no-startup-id "pactl set-sink-mute 0 toggle"
 # }}}
 
 font pango:Cica 8
@@ -187,8 +195,14 @@ gaps outer 8
 gaps inner 8
 smart_borders on
 
+bar {
+    swaybar_command waybar
+}
+
 # autostart
-exec --no-startup-id fcitx5
+exec --no-startup-id fcitx-autostart
+#exec --no-startup-id fcitx5
 exec --no-startup-id mako
+exec swayidle -w timeout 300 $lock timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep $lock
 exec_always --no-startup-id ~/.config/sway/wallpaper.sh
-exec_always --no-startup-id ~/.config/waybar/launch.sh
+#exec_always --no-startup-id ~/.config/waybar/launch.sh
