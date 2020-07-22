@@ -163,10 +163,13 @@ bindsym XF86WakeUp+F5 exec "sudo light -U 5"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +10%"
 bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%"
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle"
+#bindsym ? exec --no-startup-id "pactl set-source-mute 1 toggle"
 ## Thinkpad only
 bindsym XF86WakeUp+F3 exec --no-startup-id "pactl set-sink-volume 0 +10%"
 bindsym XF86WakeUp+F2 exec --no-startup-id "pactl set-sink-volume 0 -5%"
 bindsym XF86WakeUp+F1 exec --no-startup-id "pactl set-sink-mute 0 toggle"
+bindsym XF86WakeUp+F4 exec --no-startup-id "pactl set-source-mute 1 toggle"
+
 # }}}
 
 font pango:Cica 8
@@ -203,6 +206,6 @@ bar {
 exec --no-startup-id fcitx-autostart
 #exec --no-startup-id fcitx5
 exec --no-startup-id mako
-exec swayidle -w timeout 300 $lock timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep $lock
+exec swayidle -w timeout 1800 $lock timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep $lock
 exec_always --no-startup-id ~/.config/sway/wallpaper.sh
 #exec_always --no-startup-id ~/.config/waybar/launch.sh
