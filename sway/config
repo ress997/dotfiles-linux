@@ -186,9 +186,9 @@ input type:keyboard {
 	xkb_options ctrl:nocaps
 }
 
+for_window [app_id="pavucontrol"] floating enable, resize set 600 400
 for_window [class="Blueman-manager"] floating enable, resize set 600 400
 for_window [class="Fcitx-config-gtk3"] floating enable, resize set 600 400
-for_window [class="Pavucontrol"] floating enable, resize set 600 400
 for_window [class="mozc_tool"] floating enable, resize set 600 400
 
 # no title bar
@@ -199,13 +199,12 @@ gaps inner 8
 smart_borders on
 
 bar {
-    swaybar_command waybar
+	swaybar_command waybar
 }
 
 # autostart
 exec --no-startup-id fcitx-autostart
-#exec --no-startup-id fcitx5
 exec --no-startup-id mako
+exec "~/.local/bin/yaskkserv2 --google-suggest --google-cache-filename=/tmp/yaskkserv2.cache ~/.local/share/skk/dictionary.yaskkserv2 "
 exec swayidle -w timeout 1800 $lock timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep $lock
 exec_always --no-startup-id ~/.config/sway/wallpaper.sh
-#exec_always --no-startup-id ~/.config/waybar/launch.sh
